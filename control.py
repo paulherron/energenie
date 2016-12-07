@@ -1,5 +1,6 @@
 #import the required modules
 import RPi.GPIO as GPIO
+import sys
 import time
 
 # set the pins numbering mode
