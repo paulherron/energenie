@@ -33,35 +33,35 @@ GPIO.output (13, False)
 # The On/Off code pairs correspond to the hand controller codes.
 # True = '1', False ='0'
 
-# Set K0-K3
-print "sending code 1111 socket 1 on"
-GPIO.output (11, True)
-GPIO.output (15, True)
-GPIO.output (16, True)
-GPIO.output (13, True)
-# let it settle, encoder requires this
-time.sleep(0.1)	
-# Enable the modulator
-GPIO.output (22, True)
-# keep enabled for a period
-time.sleep(0.25)
-# Disable the modulator
-GPIO.output (22, False)
-
-		#raw_input('hit return key to send socket 1 OFF code')
-		## Set K0-K3
-		#print "sending code 0111 Socket 1 off"
-		#GPIO.output (11, True)
-		#GPIO.output (15, True)
-		#GPIO.output (16, True)
-		#GPIO.output (13, False)
-		## let it settle, encoder requires this
-		#time.sleep(0.1)
-		## Enable the modulator
-		#GPIO.output (22, True)
-		## keep enabled for a period
-		#time.sleep(0.25)
-		## Disable the modulator
-		#GPIO.output (22, False)
+if sys.argv[1] == 'on':
+	# Set K0-K3
+	print "sending code 1111 socket 1 on"
+	GPIO.output (11, True)
+	GPIO.output (15, True)
+	GPIO.output (16, True)
+	GPIO.output (13, True)
+	# let it settle, encoder requires this
+	time.sleep(0.1)	
+	# Enable the modulator
+	GPIO.output (22, True)
+	# keep enabled for a period
+	time.sleep(0.25)
+	# Disable the modulator
+	GPIO.output (22, False)
+else:
+	# Set K0-K3
+	print "sending code 0111 Socket 1 off"
+	GPIO.output (11, True)
+	GPIO.output (15, True)
+	GPIO.output (16, True)
+	GPIO.output (13, False)
+	# let it settle, encoder requires this
+	time.sleep(0.1)
+	# Enable the modulator
+	GPIO.output (22, True)
+	# keep enabled for a period
+	time.sleep(0.25)
+	# Disable the modulator
+	GPIO.output (22, False)
 
 GPIO.cleanup()
