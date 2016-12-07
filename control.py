@@ -1,5 +1,7 @@
 #import the required modules
 import RPi.GPIO as GPIO
+import datetime
+import json
 import sys
 import time
 
@@ -34,6 +36,10 @@ GPIO.output (13, False)
 # The On/Off code pairs correspond to the hand controller codes.
 # True = '1', False ='0'
 
+def updateJson(status):
+	with open('www/index.json', 'w') as outfile:
+		json.dump({'lastCommand': status, 'lastCommandTime': datetime.datetime.now().isoformat()}, outfile)
+
 if sys.argv[1] == 'on':
 	# Set K0-K3
 	print "sending code 1111 socket 1 on"
@@ -49,6 +55,8 @@ if sys.argv[1] == 'on':
 	time.sleep(0.25)
 	# Disable the modulator
 	GPIO.output (22, False)
+
+	updateJson('on');
 else:
 	# Set K0-K3
 	print "sending code 0111 Socket 1 off"
@@ -64,5 +72,7 @@ else:
 	time.sleep(0.25)
 	# Disable the modulator
 	GPIO.output (22, False)
+
+	updateJson('off')
 
 GPIO.cleanup()
