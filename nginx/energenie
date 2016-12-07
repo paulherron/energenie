@@ -1,5 +1,6 @@
 server {
-        listen    80;
+	listen 80;
 
-        root    /home/pi/energenie/www;
+	root /home/pi/energenie/www;
+	index index.json;
 }
