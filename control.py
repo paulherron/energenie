@@ -2,6 +2,7 @@
 import RPi.GPIO as GPIO
 import datetime
 import json
+import os
 import sys
 import time
 
@@ -37,7 +38,7 @@ GPIO.output (13, False)
 # True = '1', False ='0'
 
 def updateJson(status):
-	with open('www/index.json', 'w') as outfile:
+	with open(os.path.dirname(__file__) + '/www/index.json', 'w') as outfile:
 		json.dump({'lastCommand': status, 'lastCommandTime': datetime.datetime.now().isoformat()}, outfile)
 
 if sys.argv[1] == 'on':
