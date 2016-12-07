@@ -47,3 +47,21 @@ GPIO.output (22, True)
 time.sleep(0.25)
 # Disable the modulator
 GPIO.output (22, False)
+
+		#raw_input('hit return key to send socket 1 OFF code')
+		## Set K0-K3
+		#print "sending code 0111 Socket 1 off"
+		#GPIO.output (11, True)
+		#GPIO.output (15, True)
+		#GPIO.output (16, True)
+		#GPIO.output (13, False)
+		## let it settle, encoder requires this
+		#time.sleep(0.1)
+		## Enable the modulator
+		#GPIO.output (22, True)
+		## keep enabled for a period
+		#time.sleep(0.25)
+		## Disable the modulator
+		#GPIO.output (22, False)
+
+GPIO.cleanup()
