@@ -14,6 +14,7 @@ exec($command, $output, $returnVar);
 
 $response = array(
 	'error' => (bool) $returnVar,
+	'action' => $action,
 	'output' => $output
 );
 
