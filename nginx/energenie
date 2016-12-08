@@ -3,4 +3,6 @@ server {
 
 	root /home/pi/energenie/www;
 	index index.json;
+
+	include php.conf;
 }
