@@ -9,7 +9,7 @@ if (!($action == 'on' || $action == 'off')) {
 	die("Invalid action. Should be 'on' or 'off'.");
 }
 
-$command = 'python /Users/paulherron/Projects/energenie/app/control.py '.$action.' 2>&1';
+$command = 'python ../control.py '.$action.' 2>&1';
 exec($command, $output, $returnVar);
 
 $response = array(
