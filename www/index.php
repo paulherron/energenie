@@ -1,6 +1,11 @@
 <?php
+
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+
 if (!isset($_GET['action'])) {
-	die('No action specified');
+	echo file_get_contents('index.json');
+	die;
 }
 
 $action = $_GET['action'];
@@ -18,6 +23,4 @@ $response = array(
 	'output' => $output
 );
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
 echo json_encode($response);
