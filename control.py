@@ -38,42 +38,47 @@ GPIO.output (13, False)
 # True = '1', False ='0'
 
 def updateJson(status):
-	with open(os.path.dirname(__file__) + '/www/index.json', 'w') as outfile:
-		json.dump({'lastCommand': status, 'lastCommandTime': datetime.datetime.now().isoformat()}, outfile)
+    with open(os.path.dirname(__file__) + '/www/index.json', 'w') as outfile:
+        json.dump({'lastCommand': status, 'lastCommandTime': datetime.datetime.now().isoformat()}, outfile)
 
-if sys.argv[1] == 'on':
-	# Set K0-K3
-	print "sending code 1111 socket 1 on"
-	GPIO.output (11, True)
-	GPIO.output (15, True)
-	GPIO.output (16, True)
-	GPIO.output (13, True)
-	# let it settle, encoder requires this
-	time.sleep(0.1)	
-	# Enable the modulator
-	GPIO.output (22, True)
-	# keep enabled for a period
-	time.sleep(0.25)
-	# Disable the modulator
-	GPIO.output (22, False)
+if sys.argv[1] not in ('1', '2'):
+    print "Specify a switch to control: 1 or 2"
+    GPIO.cleanup()
+    quit()
 
-	updateJson('on');
+if sys.argv[2] == 'on':
+    # Set K0-K3
+    print "turning socket " + sys.argv[1] + " on"
+    GPIO.output (11, True if sys.argv[1] == '1' else False)
+    GPIO.output (15, True)
+    GPIO.output (16, True)
+    GPIO.output (13, True)
+    # let it settle, encoder requires this
+    time.sleep(0.1)	
+    # Enable the modulator
+    GPIO.output (22, True)
+    # keep enabled for a period
+    time.sleep(0.25)
+    # Disable the modulator
+    GPIO.output (22, False)
+
+    updateJson('on');
 else:
-	# Set K0-K3
-	print "sending code 0111 Socket 1 off"
-	GPIO.output (11, True)
-	GPIO.output (15, True)
-	GPIO.output (16, True)
-	GPIO.output (13, False)
-	# let it settle, encoder requires this
-	time.sleep(0.1)
-	# Enable the modulator
-	GPIO.output (22, True)
-	# keep enabled for a period
-	time.sleep(0.25)
-	# Disable the modulator
-	GPIO.output (22, False)
+    # Set K0-K3
+    print "turning socket " + sys.argv[1] + " off"
+    GPIO.output (11, True if sys.argv[1] == '1' else False)
+    GPIO.output (15, True)
+    GPIO.output (16, True)
+    GPIO.output (13, False)
+    # let it settle, encoder requires this
+    time.sleep(0.1)
+    # Enable the modulator
+    GPIO.output (22, True)
+    # keep enabled for a period
+    time.sleep(0.25)
+    # Disable the modulator
+    GPIO.output (22, False)
 
-	updateJson('off')
+    updateJson('off')
 
 GPIO.cleanup()

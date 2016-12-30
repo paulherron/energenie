@@ -9,17 +9,22 @@ if (!isset($_GET['action'])) {
 }
 
 $action = $_GET['action'];
-
 if (!($action == 'on' || $action == 'off')) {
 	die("Invalid action. Should be 'on' or 'off'.");
 }
 
-$command = 'python ../control.py '.$action.' 2>&1';
-exec($command, $output, $returnVar);
+$switch = $_GET['switch'];
+if (!($action == 1 || $action == 2)) {
+	die("Invalid switch. Should be '1' or '2'.");
+}
+
+$command = 'python ../control.py '.$switch.' '.$action.' 2>&1';
+exec($command, $output, $exitCode);
 
 $response = array(
-	'error' => (bool) $returnVar,
+	'error' => (bool) $exitCode,
 	'action' => $action,
+	'switch' => $switch,
 	'output' => $output
 );
 
