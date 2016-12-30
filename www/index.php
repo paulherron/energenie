@@ -14,7 +14,7 @@ if (!($action == 'on' || $action == 'off')) {
 }
 
 $switch = $_GET['switch'];
-if (!($action == 1 || $action == 2)) {
+if (!($switch == 1 || $switch == 2)) {
 	die("Invalid switch. Should be '1' or '2'.");
 }
 
