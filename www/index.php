@@ -18,7 +18,8 @@ if (!($switch == 1 || $switch == 2)) {
 	die("Invalid switch. Should be '1' or '2'.");
 }
 
-$command = 'python ../control.py '.$switch.' '.$action.' 2>&1';
+// Send the same command several times, as depending on interference it can sometimes be missed.
+$command = 'for i in $(seq 3); do python ../control.py '.$switch.' '.$action.' 2>&1; done';
 exec($command, $output, $exitCode);
 
 $response = array(
