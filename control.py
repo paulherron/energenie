@@ -37,8 +37,8 @@ GPIO.output (13, False)
 # The On/Off code pairs correspond to the hand controller codes.
 # True = '1', False ='0'
 
-def updateJson(status):
-    with open(os.path.dirname(__file__) + '/www/index.json', 'w') as outfile:
+def updateJson(status, switch):
+    with open(os.path.dirname(__file__) + '/www/switch' + switch + '-status.json', 'w') as outfile:
         json.dump({'lastCommand': status, 'lastCommandTime': datetime.datetime.now().isoformat()}, outfile)
 
 if sys.argv[1] not in ('1', '2'):
@@ -62,7 +62,7 @@ if sys.argv[2] == 'on':
     # Disable the modulator
     GPIO.output (22, False)
 
-    updateJson('on');
+    updateJson('on', sys.argv[1]);
 else:
     # Set K0-K3
     print "turning socket " + sys.argv[1] + " off"
@@ -79,6 +79,6 @@ else:
     # Disable the modulator
     GPIO.output (22, False)
 
-    updateJson('off')
+    updateJson('off', sys.argv[1])
 
 GPIO.cleanup()

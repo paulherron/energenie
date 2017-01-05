@@ -3,19 +3,19 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
+$switch = $_GET['switch'];
+if (!($switch == 1 || $switch == 2)) {
+	die("Invalid switch. Should be '1' or '2'.");
+}
+
 if (!isset($_GET['action'])) {
-	echo file_get_contents('index.json');
+	echo file_get_contents('switch-'.$switch.'-status.json');
 	die;
 }
 
 $action = $_GET['action'];
 if (!($action == 'on' || $action == 'off')) {
 	die("Invalid action. Should be 'on' or 'off'.");
-}
-
-$switch = $_GET['switch'];
-if (!($switch == 1 || $switch == 2)) {
-	die("Invalid switch. Should be '1' or '2'.");
 }
 
 // Send the same command several times, as depending on interference it can sometimes be missed.
