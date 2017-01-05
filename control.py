@@ -38,7 +38,7 @@ GPIO.output (13, False)
 # True = '1', False ='0'
 
 def updateJson(status, switch):
-    with open(os.path.dirname(__file__) + '/www/switch' + switch + '-status.json', 'w') as outfile:
+    with open(os.path.dirname(__file__) + '/www/switch-' + switch + '-status.json', 'w') as outfile:
         json.dump({'lastCommand': status, 'lastCommandTime': datetime.datetime.now().isoformat()}, outfile)
 
 if sys.argv[1] not in ('1', '2'):
