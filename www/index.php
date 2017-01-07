@@ -24,7 +24,7 @@ exec($command, $output, $exitCode);
 
 $response = array(
 	'error' => (bool) $exitCode,
-	'action' => $action,
+	'lastCommand' => $action,
 	'switch' => $switch,
 	'output' => $output
 );
