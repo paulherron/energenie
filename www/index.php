@@ -18,8 +18,18 @@ if (!($action == 'on' || $action == 'off')) {
 	die("Invalid action. Should be 'on' or 'off'.");
 }
 
+// Always start by turning the switch off first. If the requested action is 'off', there'll be
+// nothing further to do. If the requested action is 'on', the device will be started from a
+// freshly powered-on state - useful for something like an electric blanket that might need to
+// be turned off and on for the heat to trigger.
+//
 // Send the same command several times, as depending on interference it can sometimes be missed.
-$command = 'for i in $(seq 3); do python ../control.py '.$switch.' '.$action.' 2>&1; done';
+$command = 'for i in $(seq 3); do python ../control.py '.$switch.' off 2>&1; done;';
+
+if ($action == 'on') {
+	$command .= ' for i in $(seq 3); do python ../control.py '.$switch.' on 2>&1; done';
+}
+
 exec($command, $output, $exitCode);
 
 $response = array(
